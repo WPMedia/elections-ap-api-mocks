@@ -8,3 +8,6 @@
 
 # Dependency directory
 node_modules
+
+# Output directory for test data
+test

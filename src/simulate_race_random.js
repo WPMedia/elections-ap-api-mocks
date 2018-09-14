@@ -40,6 +40,7 @@ module.exports = (tables, races, startime, endtime, interval) => {
         id: candidate.id,
         name: candidate.name,
         party: candidate.party,
+        incumbent: candidate.incumbent,
         voteTally: 0,
         voteWeight: calcVoteWeight(candidate)
       }
@@ -78,13 +79,15 @@ module.exports = (tables, races, startime, endtime, interval) => {
 
         run.raceCalled = true;
         run.raceWinner = candidate;
+        candidate.winner = true;
       });
     };
 
     // prime the election results
     const run = {
-      race: race.id,
+      id: race.id,
       state: race.state,
+      statename: race.statename,
       precinctsReporting:0,
       precinctsTotal:100,
       precinctsReportingPct: 0,
@@ -104,9 +107,8 @@ module.exports = (tables, races, startime, endtime, interval) => {
 
         const progress = ((timestamp - startime) / duration);
         run.raceStarted = true;
-        run.precinctsReportingPct = 100 * progress;
         run.precinctsReporting = Math.ceil(run.precinctsTotal * progress);
-
+        run.precinctsReportingPct = 100 * run.precinctsReporting / run.precinctsTotal;
 
         const candidates = fip.candidates;
         let threshold = Math.random();

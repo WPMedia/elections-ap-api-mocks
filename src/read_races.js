@@ -12,12 +12,13 @@ function parseRaces(tables) {
     const field = line.split(',');
 
     const race = {
-      id:       field[0],
-      chamber:  field[1],
-      state:    field[2],
-      winner:   field[4],
-      district: field[5],
-      special:  field[6],
+      id:        field[0],
+      chamber:   field[1],
+      state:     field[2],
+      statename: field[2],
+      winner:    field[4],
+      district:  field[5],
+      special:   field[6],
       fips: [],
       candidates: []
     };
@@ -49,7 +50,7 @@ function parseRaces(tables) {
         id:   field[index],
         name: field[index+1],
         party: field[index+2],
-        incumbent: field[index+3],
+        incumbent: field[index+3] === 'X', // coerce to boolean
       });
     });
   }).then(() => tables); // return the tables and races when done reading

@@ -1,6 +1,9 @@
+const save = require('./lib/save');
+
 const readTables = require('./read_tables');
 const readRaces = require('./read_races');
 const simulateRace = require('./simulate_race_random');
+const transformAPResult = require('./transform_ap_result');
 
 const SECONDS = 1000;
 const MINUTE = 60000;
@@ -13,6 +16,15 @@ readTables.then(readRaces).then((tables) => {
   const interval = 30 * SECONDS;
 
   const results = simulateRace(tables, races, start, end, interval);
-  console.log('results:', JSON.stringify(results, null, 2));
+  const timestamps = Object.getOwnPropertyNames(results);
+  timestamps.forEach(timestamp => {
+    // convert simulation to AP model
+    const apResult = transformAPResult(timestamp, results[timestamp]);
+
+    // write result to test directory
+    const directory = `./test/${apResult.electionDate}/`;
+    const filename = `${apResult.timestamp}test=true&format=json&level=fipscode.json`;
+    save(directory, filename, apResult);
+  });
 });
 
