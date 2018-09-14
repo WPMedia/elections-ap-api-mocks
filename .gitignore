@@ -1,0 +1,10 @@
+# dotted files
+.*
+
+# allowed dotted files
+!.jshint*
+!.eslint*
+!.gitignore
+
+# Dependency directory
+node_modules

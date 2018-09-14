@@ -1,0 +1,14 @@
+{
+  "name": "elections-ap-api-mocks",
+  "version": "1.0.0",
+  "description": "Test data generator for the AP elections API",
+  "main": "./src/index.js",
+  "scripts": {
+    "start": "node ./src/index.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "es6-promise": "^4.2.5"
+  }
+}
