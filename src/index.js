@@ -24,7 +24,8 @@ readTables.then(readRaces).then((tables) => {
     // write result to test directory
     const directory = `./test/${apResult.electionDate}/`;
     const filename = `${apResult.timestamp}test=true&format=json&level=fipscode.json`;
-    save(directory, filename, apResult);
+    const stringEscape = true;
+    save(directory, filename, apResult, stringEscape);
   });
 });
 

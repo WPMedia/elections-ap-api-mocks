@@ -3,8 +3,10 @@ const fs = require('fs');
 /**
  * writes a json object to a directory, ensuring the directory exists before writing
  */
-module.exports = (directory, filename, data) => {
-  const json = JSON.stringify(data, null, 2);
+module.exports = (directory, filename, data, escape) => {
+  let json = JSON.stringify(data, null, 2);
+  if (escape) json = `"${json.replace(/"/g,'\\\"')}"`;
+
   if (!fs.existsSync(directory)){
     fs.mkdirSync(directory);
   }
