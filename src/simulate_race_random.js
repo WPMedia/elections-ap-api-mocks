@@ -105,7 +105,7 @@ module.exports = (tables, races, startime, endtime, interval) => {
       run.fips.forEach(fip => {
         if (timestamp < fip.voteStart) return;
 
-        const progress = ((timestamp - startime) / duration);
+        const progress = ((timestamp - fip.voteStart) / duration);
         run.raceStarted = true;
         run.precinctsReporting = Math.ceil(run.precinctsTotal * progress);
         run.precinctsReportingPct = 100 * run.precinctsReporting / run.precinctsTotal;

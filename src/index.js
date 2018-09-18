@@ -19,11 +19,11 @@ readTables.then(readRaces).then((tables) => {
   const timestamps = Object.getOwnPropertyNames(results);
   timestamps.forEach(timestamp => {
     // convert simulation to AP model
-    const apResult = transformAPResult(timestamp, results[timestamp]);
+    const apResult = transformAPResult(timestamp, interval, results[timestamp]);
 
     // write result to test directory
     const directory = `./test/${apResult.electionDate}/`;
-    const filename = `${apResult.timestamp}test=true&format=json&level=fipscode.json`;
+    const filename = `${apResult.timestamp}test=true&format=json&level=fipscode&.json`;
     const stringEscape = true;
     save(directory, filename, apResult, stringEscape);
   });

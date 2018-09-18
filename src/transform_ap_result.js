@@ -3,7 +3,7 @@ const parseName = require('./lib/parse_name');
 /**
  * maps the simulated race data into a model matching the AP api.
  */
-module.exports = (timestamp, snapshot) => {
+module.exports = (timestamp, interval, snapshot) => {
   const date = new Date(Number.parseInt(timestamp));
   const iso = date.toISOString();
   const day = `${date.getFullYear()}-${date.getMonth()+1}-${date.getDate()}`;
@@ -11,6 +11,7 @@ module.exports = (timestamp, snapshot) => {
   const apRoot = {
     "electionDate": day, // "2018-09-12",
     "timestamp": iso,    // "2018-09-10T20:10:04.549Z",
+    "nextrequest": `http://localhost:3001/${day}?test=true&format=json&level=fipscode&officeID=H%2CS&apiKey=AAAAAAAAAAAAA`,   // "https://api.ap.org/v2/elections/2018-09-12?format=JSON&level=FIPSCODE&officeID=G%2cH%2cS&test=TRUE&minDateTime=2018-09-10T13%3a28%3a27.167Z"
     "races": []
   };
 
