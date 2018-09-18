@@ -6,7 +6,7 @@ const parseName = require('./lib/parse_name');
 module.exports = (timestamp, interval, snapshot) => {
   const date = new Date(Number.parseInt(timestamp));
   const iso = date.toISOString();
-  const day = `${date.getFullYear()}-${date.getMonth()+1}-${date.getDate()}`;
+  const day = iso.split("T")[0];
 
   const apRoot = {
     "electionDate": day, // "2018-09-12",
@@ -23,7 +23,7 @@ module.exports = (timestamp, interval, snapshot) => {
     // STEP 1: defined the race node
     const apRace = {
       "test": true,                  // true
-      "national": false,              // true
+      "national": false,             // true
       "raceID": race.id,             // "40006"
       "raceType": "General",         // General, Dem Primary, GOP Primary, ...
       "raceTypeID": "G",             // D (Dem Primary), R (GOP Primary), G (General), ...
@@ -74,7 +74,7 @@ module.exports = (timestamp, interval, snapshot) => {
   function buildCandidateNodes(candidates) {
     const party = {
       'D': 'Dem',
-      'G': 'GOP',
+      'R': 'GOP',
       'L': 'Lib',
       'I': 'Ind'
     };

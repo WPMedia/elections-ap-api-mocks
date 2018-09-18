@@ -38,6 +38,9 @@ function parseRaces(tables) {
       if (AT_LARGE(race.state)) {
         race.fips = table.fips;
       } else {
+        if (!table) {
+          console.error('uh oh');
+        }
         race.fips = Object.getOwnPropertyNames(table.districtsByFip);
       }
     }
