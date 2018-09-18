@@ -4,7 +4,7 @@
   "description": "Test data generator for the AP elections API",
   "main": "./src/index.js",
   "scripts": {
-    "start": "node ./src/index.js"
+    "start": "node --max_old_space_size=8000 ./src/index.js"
   },
   "author": "",
   "license": "ISC",

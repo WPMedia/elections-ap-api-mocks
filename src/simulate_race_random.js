@@ -17,7 +17,8 @@ module.exports = (tables, races, startime, endtime, interval) => {
   const results = {};
 
   // run each race
-  races.forEach(race => {
+  Object.getOwnPropertyNames(races).forEach(raceId => {
+    const race = races[raceId];
     const stateTable = tables.states[race.state];
     const districts = race.chamber === 'Senate' ? stateTable.districts.length : 1;
     const stateVoters = 300000 * districts;
@@ -29,8 +30,8 @@ module.exports = (tables, races, startime, endtime, interval) => {
       const isMajorParty = candidate.party === 'D' || candidate.party === 'R';
       const isLikelyWinner = race.winner === candidate.id;
 
-      if (isLikelyWinner) return 0.54;
-      if (isMajorParty) return 0.44;
+      if (isLikelyWinner) return 0.6;
+      if (isMajorParty) return 0.38;
       return 0.02;
     };
 
@@ -40,6 +41,7 @@ module.exports = (tables, races, startime, endtime, interval) => {
         id: candidate.id,
         name: candidate.name,
         party: candidate.party,
+        incumbent: candidate.incumbent,
         voteTally: 0,
         voteWeight: calcVoteWeight(candidate)
       }
@@ -78,13 +80,17 @@ module.exports = (tables, races, startime, endtime, interval) => {
 
         run.raceCalled = true;
         run.raceWinner = candidate;
+        candidate.winner = true;
       });
     };
 
     // prime the election results
     const run = {
-      race: race.id,
+      id: race.id,
       state: race.state,
+      chamber: race.chamber,
+      statename: race.statename,
+      district: race.district,
       precinctsReporting:0,
       precinctsTotal:100,
       precinctsReportingPct: 0,
@@ -102,11 +108,10 @@ module.exports = (tables, races, startime, endtime, interval) => {
       run.fips.forEach(fip => {
         if (timestamp < fip.voteStart) return;
 
-        const progress = ((timestamp - startime) / duration);
+        const progress = ((timestamp - fip.voteStart) / duration);
         run.raceStarted = true;
-        run.precinctsReportingPct = 100 * progress;
         run.precinctsReporting = Math.ceil(run.precinctsTotal * progress);
-
+        run.precinctsReportingPct = 100 * run.precinctsReporting / run.precinctsTotal;
 
         const candidates = fip.candidates;
         let threshold = Math.random();

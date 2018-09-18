@@ -1,4 +1,4 @@
-﻿race_id,chamber,st,state,winner_id,district,special,candidate_id_1,candidate_id_1,party_1,incumbent_1,candidate_id_2,party_2,incumbent_2,candidate_id_3,party_3,incumbent_3,party_3,incumbant_3
+﻿race_id,chamber,st,state,winner_id,district,special,candidate_id_1,candidate_name_1,party_1,incumbent_1,candidate_id_2,candidate_name_2,party_2,incumbent_2,candidate_id_3,candidate_name_3,party_3,incumbent_3
 1000,Senate,AZ,Arizona,2000,,,2000,Kyrsten Sinema,D,,2111,Martha McSally,R,,,,,
 1001,Senate,CA,California,2001,,,2001,Dianne Feinstein,D,X,2112,Paul Allen Taylor,R,,2223,Derrick Michael Reid,L,
 1002,Senate,CT,Connecticut,2002,,,2002,Chris Murphy,D,X,2113,Matthew Corey,R,,,,,

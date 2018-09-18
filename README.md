@@ -28,3 +28,6 @@ https://www.census.gov/geo/maps-data/data/cd_national.html
 
 2010 FIPS Codes for Counties and County Equivalent Entities
 https://www.census.gov/geo/reference/codes/cou.html
+
+AP Election API Developer Guide
+http://customersupport.ap.org/doc/AP_Elections_API_Developer_Guide.pdf
