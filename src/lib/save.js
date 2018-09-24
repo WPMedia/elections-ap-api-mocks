@@ -10,7 +10,5 @@ module.exports = (directory, filename, data, escape) => {
   if (!fs.existsSync(directory)){
     fs.mkdirSync(directory);
   }
-  fs.writeFile(`${directory}/${filename}`, json, (err) => {
-    if (err) console.error(err);
-  });
+  fs.writeFileSync(`${directory}/${filename}`, json);
 };

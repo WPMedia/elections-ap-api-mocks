@@ -1,30 +1,18 @@
-const save = require('./lib/save');
+const readResponses = require('./read_responses')
+const simulateRace = require('./simulate_race')
 
-const readTables = require('./read_tables');
-const readRaces = require('./read_races');
-const simulateRace = require('./simulate_race_random');
-const transformAPResult = require('./transform_ap_result');
+const AP_RESPONSE_DIR = `./data/2018/ap-responses/2018-09-92/`
+
+const ELECTION_DATE = '2018-11-06T19:00:00.000Z' // reported by response.electionDate and response.lastUpdated
+const DATE_OVERRIDE = '2018-99-99'               // date used for output directory
 
 const SECONDS = 1000;
 const MINUTE = 60000;
 
-readTables.then(readRaces).then((tables) => {
-  const races = tables.races; // tables.races; // {1000: tables.races['1000'], 1001: tables.races['1001']};
-  const start = Date.now();
+readResponses(AP_RESPONSE_DIR).then((data) => {
+  const start = new Date(ELECTION_DATE).getTime();
   const end = start + 60 * MINUTE;
   const interval = 30 * SECONDS;
 
-  const results = simulateRace(tables, races, start, end, interval);
-  const timestamps = Object.getOwnPropertyNames(results);
-  timestamps.forEach(timestamp => {
-    // convert simulation to AP model
-    const apResult = transformAPResult(timestamp, interval, results[timestamp]);
-
-    // write result to test directory
-    const directory = `./test/${apResult.electionDate}/`;
-    const filename = `${apResult.timestamp}test=true&format=json&level=fipscode&.json`;
-    const stringEscape = true;
-    save(directory, filename, apResult, stringEscape);
-  });
-});
-
+  return simulateRace(data,start,end,interval,DATE_OVERRIDE)
+}).catch(console.error)

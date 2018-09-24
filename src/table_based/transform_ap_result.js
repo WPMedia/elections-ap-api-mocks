@@ -1,4 +1,4 @@
-const parseName = require('./lib/parse_name');
+const parseName = require('../lib/parse_name');
 
 /**
  * maps the simulated race data into a model matching the AP api.

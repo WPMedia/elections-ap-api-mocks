@@ -1,5 +1,5 @@
-const read = require('./lib/read');
-const collect = require('./lib/collect');
+const read = require('../lib/read');
+const collect = require('../lib/collect');
 
 const FILE_FIPS = `./data/2018/2018_fips_codes.csv`;
 const FILE_DISTRICTS = `./data/2018/2018_congressional_fips.csv`;

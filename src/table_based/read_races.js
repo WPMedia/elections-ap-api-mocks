@@ -1,4 +1,4 @@
-const read = require('./lib/read');
+const read = require('../lib/read');
 
 const FILE_RACES = `./data/2018/2018_races.csv`;
 const SKIP_HEADERS = true;

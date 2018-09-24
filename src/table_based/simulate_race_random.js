@@ -1,4 +1,4 @@
-const clone = require('./lib/clone');
+const clone = require('../lib/clone');
 
 module.exports = (tables, races, startime, endtime, interval) => {
   /**
